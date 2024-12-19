@@ -59,6 +59,11 @@ Welcome to the **Blog Management System**, a backend application built using **T
 
 ### Blog Endpoints
 
+### Get Api's On Postman
+## Translated Versions
+- [Click Here](PH Blog Website Api.postman_collection.json)
+___
+
 #### Create Blog
 ```http
 POST /api/blogs
@@ -139,14 +144,8 @@ POST /api/auth/login
 ## Live URL
 If deployed, provide the live URL here:
 ```
-https://your-live-url.com
+https://blog-website-api-by-express-js-mongoose-and-typescript.vercel.app/api/blogs
 ```
-
-## Contribution
-Feel free to fork the repository and contribute by submitting pull requests.
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
 
 ---
 Enjoy coding!
