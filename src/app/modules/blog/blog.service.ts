@@ -5,12 +5,13 @@ import { Blog } from './blog.model';
 
 const createBlogIntoDB = async (payload: TBlog) => {
   const result = await Blog.create(payload);
-  return result;
+  const populatedResult = await result.populate('author');
+  return populatedResult;
 };
 const updateBlogIntoDB = async (id: string, payload: TBlog) => {
   const result = await Blog.findByIdAndUpdate({ _id: id }, payload, {
     new: true,
-  });
+  }).populate('author');
   return result;
 };
 

@@ -18,12 +18,13 @@ const blog_constant_1 = require("./blog.constant");
 const blog_model_1 = require("./blog.model");
 const createBlogIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield blog_model_1.Blog.create(payload);
-    return result;
+    const populatedResult = yield result.populate('author');
+    return populatedResult;
 });
 const updateBlogIntoDB = (id, payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield blog_model_1.Blog.findByIdAndUpdate({ _id: id }, payload, {
         new: true,
-    });
+    }).populate('author');
     return result;
 });
 const deleteBlogFromDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
