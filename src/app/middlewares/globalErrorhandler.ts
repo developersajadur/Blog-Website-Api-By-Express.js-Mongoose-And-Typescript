@@ -4,6 +4,7 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from 'express';
 import { ZodError } from 'zod';
 import config from '../config';
+import status from 'http-status';
 import AppError from '../errors/AppError';
 import handleCastError from '../errors/handleCastError';
 import handleDuplicateError from '../errors/handleDuplicateError';
@@ -62,7 +63,7 @@ const globalErrorHandler: ErrorRequestHandler = (err, req, res, next) => {
   }
 
   //ultimate return
-   res.status(statusCode).json({
+  res.status(statusCode).json({
     success: false,
     message,
     errorSources,

@@ -1,7 +1,7 @@
-import { Types } from "mongoose";
+import { Types } from 'mongoose';
 
 export type TBlog = {
-    title: string;
-    content: string;
-    author?: Types.ObjectId;
-}
+  title: string;
+  content: string;
+  author?: Types.ObjectId;
+};
