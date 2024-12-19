@@ -26,7 +26,7 @@ Welcome to the **Blog Management System**, a backend application built using **T
 
 1. **Clone the Repository**
    ```bash
-   git clone https://github.com/your-username/blog-management-system.git
+   git clone https://github.com/developersajadur/Blog-Website-Api-By-Express.js-Mongoose-And-Typescript.git
    cd blog-management-system
    ```
 
