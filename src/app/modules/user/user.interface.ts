@@ -1,3 +1,4 @@
+import { USER_ROLE } from "./user.constant";
 
 export type TUser = {
     name: string;
@@ -6,3 +7,5 @@ export type TUser = {
     role?: "admin" | "user"
     isBlocked?: boolean;
 }
+
+export type TUserRole = keyof typeof USER_ROLE;
