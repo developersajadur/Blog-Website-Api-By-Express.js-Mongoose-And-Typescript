@@ -17,6 +17,7 @@ const userSchema = new Schema<TUser>({
     password: {
         type: String,
         required: true,
+        select: 0,
     },
     role: {
         type: String,
@@ -43,4 +44,4 @@ userSchema.pre('save', function(next){
 
 
 
-export const User = model<TUser>('users', userSchema);
+export const User = model<TUser>('User', userSchema);

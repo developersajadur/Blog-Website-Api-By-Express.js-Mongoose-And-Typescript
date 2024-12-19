@@ -11,5 +11,9 @@ router.post('/blogs', Auth(USER_ROLE.user) , validateRequest(blogValidations.cre
 
 router.patch('/blogs/:id', Auth(USER_ROLE.user), validateRequest(blogValidations.updateBlogValidationSchema) ,blogControllers.updateBlog)
 
+router.delete('/blogs/:id', Auth(USER_ROLE.user,USER_ROLE.admin), blogControllers.deleteBlog)
+
+router.get('/blogs',blogControllers.getAllBlog)
+
 
 export const blogRoutes = router;

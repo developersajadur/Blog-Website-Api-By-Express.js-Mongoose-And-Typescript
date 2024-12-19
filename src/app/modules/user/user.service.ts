@@ -10,4 +10,4 @@ const createStudentIntoDB = async (payload: TUser) => {
 
 export const userServices = {
     createStudentIntoDB,
-}
+} 

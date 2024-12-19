@@ -20,9 +20,5 @@ const blogSchema = new Schema<TBlog>({
 }
 )
 
-// blogSchema.pre('save', function(next){
-//     console.log(this);
-//     next();
-// })
 
 export const Blog = model<TBlog>("blog", blogSchema);
