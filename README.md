@@ -27,7 +27,7 @@ Welcome to the **Blog Management System**, a backend application built using **T
 1. **Clone the Repository**
    ```bash
    git clone https://github.com/developersajadur/Blog-Website-Api-By-Express.js-Mongoose-And-Typescript.git
-   cd blog-management-system
+   cd Blog-Website-Api-By-Express.js-Mongoose-And-Typescript
    ```
 
 2. **Install Dependencies**
