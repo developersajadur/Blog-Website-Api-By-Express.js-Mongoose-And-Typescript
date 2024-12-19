@@ -59,10 +59,10 @@ Welcome to the **Blog Management System**, a backend application built using **T
 
 ### Blog Endpoints
 
-### Get Api's On Postman
-## Translated Versions
-- [Click Here](PH Blog Website Api.postman_collection.json)
-___
+## Get Api's On Postman
+Click the link to download the Postman collection file (PH Blog Website Api.postman_collection.json).
+Open Postman, go to the "Import" section, and upload the downloaded JSON file.
+Once imported, you'll have access to all the pre-configured API requests for testing.
 
 #### Create Blog
 ```http
