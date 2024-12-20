@@ -12,7 +12,7 @@ const createBlog = catchAsync(async (req, res) => {
   const token = req.headers.authorization;
   if (!token) {
     throw new AppError(status.UNAUTHORIZED, 'unauthorized');
-  } 
+  }
   const decoded = jwt.verify(
     token,
     config.jwt_access_secret as string,
@@ -41,7 +41,7 @@ const updateBlog = catchAsync(async (req, res) => {
   const token = req.headers.authorization;
   if (!token) {
     throw new AppError(status.UNAUTHORIZED, 'unauthorized');
-  } 
+  }
   const isBlogExit = await Blog.findById(id);
   if (!isBlogExit) {
     throw new AppError(status.NOT_FOUND, 'Blog not found');
@@ -52,8 +52,11 @@ const updateBlog = catchAsync(async (req, res) => {
   ) as JwtPayload;
   const { userId } = decoded;
   const author = isBlogExit?.author?.toString();
-  if(userId !== author){
-    throw new AppError(status.FORBIDDEN, 'You are not allowed to update this blog');
+  if (userId !== author) {
+    throw new AppError(
+      status.FORBIDDEN,
+      'You are not allowed to update this blog',
+    );
   }
   const result = await blogServices.updateBlogIntoDB(id, blog);
   res.status(200).json({
@@ -68,7 +71,7 @@ const deleteBlog = catchAsync(async (req, res) => {
   const token = req.headers.authorization;
   if (!token) {
     throw new AppError(status.UNAUTHORIZED, 'unauthorized');
-  } 
+  }
   const isBlogExit = await Blog.findById(id);
   if (!isBlogExit) {
     throw new AppError(status.NOT_FOUND, 'Blog not found');
@@ -79,10 +82,13 @@ const deleteBlog = catchAsync(async (req, res) => {
   ) as JwtPayload;
   const { userId } = decoded;
   const author = isBlogExit?.author?.toString();
-  if(userId !== author){
-    throw new AppError(status.FORBIDDEN, 'You are not allowed to delete this blog');
+  if (userId !== author) {
+    throw new AppError(
+      status.FORBIDDEN,
+      'You are not allowed to delete this blog',
+    );
   }
-   await blogServices.deleteBlogFromDB(id);
+  await blogServices.deleteBlogFromDB(id);
   res.status(200).json({
     success: true,
     message: 'Blog deleted successfully',

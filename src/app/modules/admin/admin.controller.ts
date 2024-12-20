@@ -19,7 +19,7 @@ const blockUser = catchAsync(async (req, res) => {
   if (user.isBlocked) {
     throw new AppError(status.CONFLICT, 'User is already blocked');
   }
-   await adminServices.blockUserIntoDB(id as any);
+  await adminServices.blockUserIntoDB(id as any);
   res.status(200).json({
     success: true,
     message: 'User blocked successfully',
@@ -35,7 +35,7 @@ const deleteBlog = catchAsync(async (req, res) => {
   if (!blog) {
     throw new AppError(status.NOT_FOUND, 'Blog not found');
   }
- await adminServices.deleteBlogIntoDB(id as any);
+  await adminServices.deleteBlogIntoDB(id as any);
   res.status(200).json({
     success: true,
     message: 'Blog deleted successfully',
