@@ -46,11 +46,22 @@ const createBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     });
 }));
 const updateBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const id = req.params.id;
     const blog = req === null || req === void 0 ? void 0 : req.body;
+    const token = req.headers.authorization;
+    if (!token) {
+        throw new AppError_1.default(http_status_1.default.UNAUTHORIZED, 'unauthorized');
+    }
     const isBlogExit = yield blog_model_1.Blog.findById(id);
     if (!isBlogExit) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, 'Blog not found');
+    }
+    const decoded = jsonwebtoken_1.default.verify(token, config_1.default.jwt_access_secret);
+    const { userId } = decoded;
+    const author = (_a = isBlogExit === null || isBlogExit === void 0 ? void 0 : isBlogExit.author) === null || _a === void 0 ? void 0 : _a.toString();
+    if (userId !== author) {
+        throw new AppError_1.default(http_status_1.default.FORBIDDEN, 'You are not allowed to update this blog');
     }
     const result = yield blog_service_1.blogServices.updateBlogIntoDB(id, blog);
     res.status(200).json({
@@ -60,10 +71,21 @@ const updateBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     });
 }));
 const deleteBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const id = req.params.id;
+    const token = req.headers.authorization;
+    if (!token) {
+        throw new AppError_1.default(http_status_1.default.UNAUTHORIZED, 'unauthorized');
+    }
     const isBlogExit = yield blog_model_1.Blog.findById(id);
     if (!isBlogExit) {
         throw new AppError_1.default(http_status_1.default.NOT_FOUND, 'Blog not found');
+    }
+    const decoded = jsonwebtoken_1.default.verify(token, config_1.default.jwt_access_secret);
+    const { userId } = decoded;
+    const author = (_a = isBlogExit === null || isBlogExit === void 0 ? void 0 : isBlogExit.author) === null || _a === void 0 ? void 0 : _a.toString();
+    if (userId !== author) {
+        throw new AppError_1.default(http_status_1.default.FORBIDDEN, 'You are not allowed to delete this blog');
     }
     yield blog_service_1.blogServices.deleteBlogFromDB(id);
     res.status(200).json({
