@@ -22,7 +22,7 @@ const refreshToken = catchAsync(async (req, res) => {
   const { refreshToken } = req.cookies;
   const result = await AuthServices.refreshToken(refreshToken);
   const bearerToken = `Bearer ${result.accessToken}`;
-  
+
   res.status(status.OK).json({
     success: true,
     message: 'Access token is retrieved successfully',

@@ -22,8 +22,9 @@ const config_1 = __importDefault(require("../../config"));
 const user_model_1 = require("../user/user.model");
 const blog_model_1 = require("./blog.model");
 const createBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
     const blog = req === null || req === void 0 ? void 0 : req.body;
-    const token = req.headers.authorization;
+    const token = (_b = (_a = req === null || req === void 0 ? void 0 : req.headers) === null || _a === void 0 ? void 0 : _a.authorization) === null || _b === void 0 ? void 0 : _b.split(' ')[1];
     if (!token) {
         throw new AppError_1.default(http_status_1.default.UNAUTHORIZED, 'unauthorized');
     }
@@ -46,10 +47,10 @@ const createBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     });
 }));
 const updateBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b, _c;
     const id = req.params.id;
     const blog = req === null || req === void 0 ? void 0 : req.body;
-    const token = req.headers.authorization;
+    const token = (_b = (_a = req === null || req === void 0 ? void 0 : req.headers) === null || _a === void 0 ? void 0 : _a.authorization) === null || _b === void 0 ? void 0 : _b.split(' ')[1];
     if (!token) {
         throw new AppError_1.default(http_status_1.default.UNAUTHORIZED, 'unauthorized');
     }
@@ -59,7 +60,7 @@ const updateBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     }
     const decoded = jsonwebtoken_1.default.verify(token, config_1.default.jwt_access_secret);
     const { userId } = decoded;
-    const author = (_a = isBlogExit === null || isBlogExit === void 0 ? void 0 : isBlogExit.author) === null || _a === void 0 ? void 0 : _a.toString();
+    const author = (_c = isBlogExit === null || isBlogExit === void 0 ? void 0 : isBlogExit.author) === null || _c === void 0 ? void 0 : _c.toString();
     if (userId !== author) {
         throw new AppError_1.default(http_status_1.default.FORBIDDEN, 'You are not allowed to update this blog');
     }
@@ -71,9 +72,9 @@ const updateBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     });
 }));
 const deleteBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b, _c;
     const id = req.params.id;
-    const token = req.headers.authorization;
+    const token = (_b = (_a = req === null || req === void 0 ? void 0 : req.headers) === null || _a === void 0 ? void 0 : _a.authorization) === null || _b === void 0 ? void 0 : _b.split(' ')[1];
     if (!token) {
         throw new AppError_1.default(http_status_1.default.UNAUTHORIZED, 'unauthorized');
     }
@@ -83,7 +84,7 @@ const deleteBlog = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, voi
     }
     const decoded = jsonwebtoken_1.default.verify(token, config_1.default.jwt_access_secret);
     const { userId } = decoded;
-    const author = (_a = isBlogExit === null || isBlogExit === void 0 ? void 0 : isBlogExit.author) === null || _a === void 0 ? void 0 : _a.toString();
+    const author = (_c = isBlogExit === null || isBlogExit === void 0 ? void 0 : isBlogExit.author) === null || _c === void 0 ? void 0 : _c.toString();
     if (userId !== author) {
         throw new AppError_1.default(http_status_1.default.FORBIDDEN, 'You are not allowed to delete this blog');
     }

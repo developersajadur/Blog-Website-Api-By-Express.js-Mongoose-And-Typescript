@@ -20,23 +20,25 @@ const auth_service_1 = require("./auth.service");
 const loginUser = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield auth_service_1.AuthServices.loginUser(req === null || req === void 0 ? void 0 : req.body);
     const { accessToken } = result;
-    res.cookie('accessToken', accessToken, {
+    const bearerToken = `Bearer ${accessToken}`;
+    res.cookie('accessToken', bearerToken, {
         secure: config_1.default.NODE_ENV === 'production',
         httpOnly: true,
     });
     res.status(http_status_1.default.OK).json({
         success: true,
         message: 'Login successful',
-        data: { accessToken },
+        data: { accessToken: bearerToken },
     });
 }));
 const refreshToken = (0, catchAsync_1.default)((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { refreshToken } = req.cookies;
     const result = yield auth_service_1.AuthServices.refreshToken(refreshToken);
+    const bearerToken = `Bearer ${result.accessToken}`;
     res.status(http_status_1.default.OK).json({
         success: true,
         message: 'Access token is retrieved successfully',
-        data: result,
+        data: { accessToken: bearerToken },
     });
 }));
 exports.AuthControllers = {
