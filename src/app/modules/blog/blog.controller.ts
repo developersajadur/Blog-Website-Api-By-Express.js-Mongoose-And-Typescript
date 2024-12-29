@@ -9,7 +9,7 @@ import { Blog } from './blog.model';
 
 const createBlog = catchAsync(async (req, res) => {
   const blog = req?.body;
-  const token = req.headers.authorization;
+  const token = req?.headers?.authorization?.split(' ')[1];
   if (!token) {
     throw new AppError(status.UNAUTHORIZED, 'unauthorized');
   }
@@ -38,7 +38,7 @@ const createBlog = catchAsync(async (req, res) => {
 const updateBlog = catchAsync(async (req, res) => {
   const id = req.params.id;
   const blog = req?.body;
-  const token = req.headers.authorization;
+  const token = req?.headers?.authorization?.split(' ')[1];
   if (!token) {
     throw new AppError(status.UNAUTHORIZED, 'unauthorized');
   }
@@ -68,7 +68,7 @@ const updateBlog = catchAsync(async (req, res) => {
 
 const deleteBlog = catchAsync(async (req, res) => {
   const id = req.params.id;
-  const token = req.headers.authorization;
+  const token = req?.headers?.authorization?.split(' ')[1];
   if (!token) {
     throw new AppError(status.UNAUTHORIZED, 'unauthorized');
   }
