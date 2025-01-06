@@ -7,14 +7,15 @@ const loginUser = catchAsync(async (req, res) => {
   const result = await AuthServices.loginUser(req?.body);
   const { accessToken } = result;
   const bearerToken = `Bearer ${accessToken}`;
-  res.cookie('accessToken', bearerToken, {
+  console.log(bearerToken);
+  res.cookie('token', bearerToken, {
     secure: config.NODE_ENV === 'production',
     httpOnly: true,
   });
   res.status(status.OK).json({
     success: true,
     message: 'Login successful',
-    data: { accessToken: bearerToken },
+    data: { token: bearerToken },
   });
 });
 
@@ -26,7 +27,7 @@ const refreshToken = catchAsync(async (req, res) => {
   res.status(status.OK).json({
     success: true,
     message: 'Access token is retrieved successfully',
-    data: { accessToken: bearerToken },
+    data: { token: bearerToken },
   });
 });
 
